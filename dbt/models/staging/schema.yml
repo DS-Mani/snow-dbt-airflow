@@ -1,0 +1,131 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "Staging model for cleaned product data with proper types."
+    columns:
+      - name: product_key
+        description: "Unique identifier for each product."
+        tests:
+          - not_null
+          - unique
+      - name: product_subcategory_key
+        description: "Key to the subcategory this product belongs to."
+      - name: sku
+        description: "Stock Keeping Unit of the product."
+      - name: product_name
+        description: "Name of the product."
+      - name: model_name
+        description: "Name of the product's model."
+      - name: description
+        description: "Product description text."
+      - name: color
+        description: "Product color."
+      - name: size
+        description: "Product size."
+      - name: style
+        description: "Product style."
+      - name: cost
+        description: "Cost to manufacture."
+      - name: price
+        description: "Selling price."
+        tests:
+          - not_null
+
+  - name: stg_customers
+    description: "Staging model for customer records with cleaned and typed fields."
+    columns:
+      - name: customer_key
+        description: "Unique customer identifier."
+        tests:
+          - not_null
+          - unique
+      - name: prefix
+        description: "Customer prefix, e.g., Mr., Ms., Dr."
+      - name: first_name
+        description: "Customer first name."
+      - name: last_name
+        description: "Customer last name."
+      - name: birth_date
+        description: "Date of birth (converted to date)."
+      - name: marital_status
+        description: "Marital status of the customer."
+      - name: gender
+        description: "Gender of the customer."
+        tests:
+          - accepted_values:
+              values: ['M', 'F'] 
+      - name: email_address
+        description: "Email address."
+      - name: annual_income
+        description: "Annual income (converted from string to float)."
+        tests:
+          - not_null
+      - name: total_children
+        description: "Total number of children."
+      - name: education_level
+        description: "Education qualification."
+      - name: occupation
+        description: "Customer’s occupation."
+      - name: home_owner
+        description: "Whether the customer owns a home."
+
+  - name: stg_sales
+    description: "Staging model for sales transactions with order and customer info."
+    columns:
+      - name: order_date
+        description: "Date when the order was placed."
+
+      - name: stock_date
+        description: "Date when the product was stocked."
+
+      - name: order_number
+        description: "Unique order number."
+
+      - name: product_key
+        description: "Foreign key to product."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_key
+
+      - name: customer_key
+        description: "Foreign key to customer."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_key
+
+      - name: territory_key
+        description: "Foreign key to sales territory."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_territories')
+              field: territory_key
+
+      - name: order_line_item
+        description: "Line item number in the order."
+
+      - name: order_quantity
+        description: "Quantity ordered."
+
+  - name: stg_returns
+    description: "Staging model for product returns."
+    columns:
+      - name: return_date
+        description: "Date when product was returned."
+      - name: territory_key
+        description: "Territory associated with the return."
+      - name: product_key
+        description: "Product that was returned."
+      - name: return_quantity
+        description: "Quantity returned."
+
+  - name: stg_calendar
+    description: "Staging model for calendar dates."
+    columns:
+      - name: date
+        description: "Date value for joining with order data."

@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: >
+      Dimension table containing cleaned and enriched customer attributes
+      for use in analytical reporting and segmentation.
+    columns:
+      - name: customer_key
+        description: "Primary key for customer."
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: "First name of the customer."
+      - name: last_name
+        description: "Last name of the customer."
+      - name: gender
+        description: "Gender of the customer."
+      - name: annual_income
+        description: "Customer’s annual income in numeric format."
+      - name: total_children
+        description: "Number of children in the household."
+      - name: education_level
+        description: "Highest level of education attained."
+      - name: occupation
+        description: "Customer's job or profession."
+      - name: home_owner
+        description: "Flag indicating home ownership."
+  - name: dim_territories
+    description: "Territory dimension"
+    columns:
+      - name: territory_key
+        tests:
+          - not_null
+          - unique

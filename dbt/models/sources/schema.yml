@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: AZDATABASE
+    schema: raw
+    tables:
+      - name: ADVENTUREWORKS_RETURNS
+      - name: ADVENTUREWORKS_SALES_2017
+      - name: ADVENTUREWORKS_CUSTOMERS
+      - name: ADVENTUREWORKS_SALES_2016
+      - name: ADVENTUREWORKS_CALENDAR
+      - name: ADVENTUREWORKS_PRODUCTS
+      - name: ADVENTUREWORKS_TERRITORIES
+      - name: ADVENTUREWORKS_PRODUCT_CATEGORIES
+      - name: ADVENTUREWORKS_PRODUCT_SUBCATEGORIES
+      - name: ADVENTUREWORKS_SALES_2015

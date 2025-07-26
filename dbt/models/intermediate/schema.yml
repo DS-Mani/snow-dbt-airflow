@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: int_sales_with_details
+    description: 
+      Intermediate model that joins sales data with products, customers, and calendar
+      to enrich sales transactions with descriptive and dimensional information.
+    columns:
+      - name: order_date
+        description: "Date of the order."
+      - name: stock_date
+        description: "Date the item was stocked."
+      - name: order_number
+        description: "Unique identifier for the order."
+      - name: order_line_item
+        description: "Line item number within the order."
+      - name: order_quantity
+        description: "Number of items ordered."
+      - name: customer_key
+        description: "Foreign key to the customer dimension."
+      - name: first_name
+        description: "Customer's first name."
+      - name: last_name
+        description: "Customer's last name."
+      - name: gender
+        description: "Customer gender."
+      - name: annual_income
+        description: "Customer income (used in segmentation, analytics)."
+      - name: product_key
+        description: "Foreign key to product."
+      - name: product_name
+        description: "Name of the product ordered."
+      - name: color
+        description: "Color of the product."
+      - name: size
+        description: "Size of the product."
+      - name: style
+        description: "Style of the product."
+      - name: price
+        description: "Product price used to calculate revenue."
+      - name: order_calendar_date
+        description: "Normalized date from calendar dimension."
+  - name: int_sales_with_details_incremental
+    description: "Incremental version of sales with enriched customer and product details"
+    columns:
+      - name: order_number
+        tests:
+          - not_null
+          
+      - name: revenue
+        tests:
+          - not_null

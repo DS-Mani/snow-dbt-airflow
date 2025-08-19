@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: >
+      Fact table that aggregates sales by product, customer, territory, and date.
+      Includes metrics like total quantity and revenue.
+    columns:
+      - name: product_key
+        description: "Foreign key to the product dimension."
+      - name: customer_key
+        description: "Foreign key to the customer dimension."
+      - name: territory_key
+        description: "Sales territory related to the transaction."
+      - name: order_date
+        description: "Date of the order."
+      - name: total_quantity
+        description: "Total number of items ordered."
+      - name: total_revenue
+        description: "Revenue calculated as quantity * price."
+  - name: fct_returns
+    description: "Fact table with return data joined with products and territories."
+    columns:
+      - name: product_key
+        tests:
+          - not_null
+      - name: territory_key
+        tests:
+          - not_null
+      - name: return_date
+        tests:
+          - not_null
+      - name: return_quantity

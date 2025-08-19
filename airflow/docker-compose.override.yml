@@ -1,0 +1,13 @@
+
+services:
+  
+  scheduler:
+    volumes:
+      - /Users/manikanta/my_data_pipeline_project/dbt:/usr/local/airflow/dbt
+      - ~/.dbt:/home/astro/.dbt
+      - /Users/manikanta/my_data_pipeline_project/py_snow/connect.py:/usr/local/airflow/connect.py
+  triggerer:
+    volumes:
+      - /Users/manikanta/my_data_pipeline_project/dbt:/usr/local/airflow/dbt
+      - ~/.dbt:/home/astro/.dbt
+      - /Users/manikanta/my_data_pipeline_project/py_snow/connect.py:/usr/local/airflow/connect.py
